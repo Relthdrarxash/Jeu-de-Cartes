@@ -1,4 +1,5 @@
-<h1>The game is actually in french/english</h1>
+# ShittyCardGame
+<h2>The game is actually in french/english</h1>
 <p>As I'm bilingual I made it as it came out from my head, I apologize for any inconveniences.</p>
 <h2>Presentation</h2>
 	<p>This card game is quite simple, I made it to get familiar with Pygame</p>
