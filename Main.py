@@ -1,6 +1,8 @@
 # Import des bibliothèques
 import pygame
-import sys 
+import sys
+
+from pygame import mouse 
 
 from Couleurs import Couleurs
 images = [pygame.image.load(f"Cartes/{i}.png").convert_alpha() for i in range(1, 53)]
@@ -29,7 +31,6 @@ couleur_carte =  {
     "Coeur": [int(i) for i in range(26,39)],
     "Pique": [int(i) for i in range(39, 53)]}
 deck = Deck(display.fenetre)
-print(deck.deck, "\nLa longueur est de : ", len(deck.deck))
 deck.shuffle()
 textes = Textes(display.fenetre)
 p1 = Player_1(textes.font)
@@ -46,7 +47,6 @@ display.caption()
 jeu.starting_player()
 fin_partie = False
 
-print(images, "\nNb d'images : ", len(images))
 # Boucle principale
 while True : 
     # Taux de rafraîchissement
@@ -55,11 +55,20 @@ while True :
     # importer mouse_h.handle_keys avec tout 2 fois pour amener les nouvelles valeurs
     # je devrais juste faire ça pour mles valeurs qui changent pour raccourcir l'appel
     # Savoir si le bouton exit est cliqué puis afficher l'écran de sortie
+    # try:
+    print(mouse_h.compteur)
     if mouse_h.exit:
         display.affichage_fin(quit_screen)
         mouse_h.handle_mouse(deck, textes,  couleurs, couleur_carte, images, jeu, p1, p2, quit_screen)
         quit_screen.end(mouse_h, mouse_h.event)
-    
+
+    elif mouse_h.compteur == 2:
+        quit_screen.fin_partie()
+        pygame.display.update()
+        clock.tick(0.3)
+        pygame.quit()
+        sys.exit()
+
     elif display.fin_demarrage:
         # fin_demarrage : démarrage fini, en gros la boucle principale c'est celle là
         mouse_h.handle_mouse(deck, textes,  couleurs, couleur_carte, images, jeu, p1, p2, quit_screen)
@@ -70,15 +79,6 @@ while True :
         else:
             jeu.vide = False
             # Pour avoir une consigne vide lors de l'animation
-                
-    elif not deck.deck:
-        # La fin du jeu provoque un erreur (index out of range puisqu'il n'y a plus de cartes)
-        # Donc affichage des scores pour 2 secondes puis fin du jeu
-         quit_screen.fin_partie()
-         pygame.display.update()
-         clock.tick(0.3)
-         pygame.quit()
-         sys.exit()
     
     else:
         # Test du démarrage, appuyer sur espace et enchainer les joueurs après les règles
@@ -90,4 +90,14 @@ while True :
     # On met à jour l'affichage
     pygame.display.update()
 
+
+"""    except Exception as e:
+        print(e)
+        # La fin du jeu provoque un erreur (index out of range puisqu'il n'y a plus de cartes)
+        # Donc affichage des scores pour 2 secondes puis fin du jeu
+        quit_screen.fin_partie()
+        pygame.display.update()
+        clock.tick(0.3)
+        pygame.quit()
+        sys.exit()"""
 # Créer une classe avec toutes les variables qui changent ?

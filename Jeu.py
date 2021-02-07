@@ -7,7 +7,7 @@ class Jeu:
         self.p1 = p1
         self.p2 = p2
         self.first_player = randint(0,1)
-        self.text = "Player {self.first_player + 1} starts"
+        self.text = f"Player {self.first_player + 1} starts"
         self.printed_text = font.render(self.text,True,pygame.Color("#000000"))
         self.espace_demarrage = self.printed_text.get_rect(center=(400, 300))
         self.consigne = self.font.render("Click on the deck",True,pygame.Color("#000000"))
@@ -76,7 +76,7 @@ class Jeu:
         
     def consignes(self, couleurs):
         if self.vide:
-            self.text = ""
+            self.text = None
             # Enlève la consigne si jeu.vide est vrai donc quand l'animation est en cours
         elif not couleurs.selected:
             self.text = "Veuillez selectionner une couleur"

@@ -7,7 +7,7 @@ class Deck:
         self.fenetre = fenetre
         self.carte = pygame.image.load("Cartes/back.png").convert_alpha()
         self.espace_carte = self.carte.get_rect(center=(150, 250))
-        self.deck = list(i for i in range(52))
+        self.deck = list(i for i in range(2))
         
         self.carte_animee = pygame.image.load("Cartes/back.png").convert_alpha()
         self.rect_carte_animee = self.carte_animee.get_rect(center=(150, 250))

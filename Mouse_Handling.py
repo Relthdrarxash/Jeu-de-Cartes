@@ -7,6 +7,8 @@ class Mouse_Handling:
         self.exit = False
         self.indicator = False
         self.fenetre = fenetre
+        self.results = False
+        self.compteur = 0
 
     def handle_mouse(self, deck, textes, couleurs, couleur_carte, images, jeu, p1, p2, quit_screen):
         """
@@ -60,6 +62,7 @@ class Mouse_Handling:
                     #Changement des coordonnées de la face de la carte, l'animation viendrait ici
                     jeu.jeu(couleurs.selected_color, self, deck, p1, p2, couleurs)
                     # Appel de la fonction de jeu pour les comparaisons et les points
+                    self.compteur += 1
 
                     
                 if textes.fin.get_rect().collidepoint(pygame.mouse.get_pos()):
@@ -92,3 +95,4 @@ class Mouse_Handling:
                     # fin des règles
                     textes.joueur = True
                     # début de l'affichage des joueurs
+                    self.results = True
